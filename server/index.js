@@ -3,7 +3,7 @@ const app = express();
 const mysql = require("mysql");
 const PORT = process.env.port || 8000;
 
-const dbConnect = mysql.createPool({
+const dbConnect = mysql.createPool({ 
   host: "localhost",
   user: "root",
   password: "1234",
@@ -11,8 +11,9 @@ const dbConnect = mysql.createPool({
 });
 
 app.get("/", (req, res) => {
-  const sqlQuery = "INSERT INTO requested (test) VALUES (1)";
+  const sqlQuery = "INSERT INTO chech (test) VALUES (1)"; 
   dbConnect.query(sqlQuery, (err, result) => {
+    console.log(err);
     res.send("success!");
   });
 });
