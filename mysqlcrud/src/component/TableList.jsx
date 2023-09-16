@@ -1,8 +1,15 @@
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-
+import Axios from "axios";  
 
 function TableList () {
+
+    const onSubmit = () => {
+        Axios.get("http://localhost:8000/", {}).then(() => {
+            alert("등록 완료");
+        });
+    };
+    
     return(
         // 테이블 보여주는 컴포넌트 bootstrap사용하여 테이블 완성.
         <div>
@@ -39,7 +46,7 @@ function TableList () {
                 </tbody>
             </Table>
             <div className="text-center mb-3">
-                <Button variant="success">글쓰기</Button>
+                <Button variant="success" onClick={onSubmit}>글쓰기</Button>
                 <Button variant="secondary">수정하기</Button>
                 <Button variant="warning">삭제하기</Button>
                 <button variant="warning">삭제하기</button>
