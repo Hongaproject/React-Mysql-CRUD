@@ -6,6 +6,18 @@ const PORT = process.env.port || 8000;
 // DB 연동시 위한 코드 
 const mysql = require("mysql");
 
+// cors 오류시 사용되는 코드
+// cors란 교차 출처 리소스이며 현 웹페이지 도메인서 다른 웹페이지 도메인으로 리소스가 요청되는 현상 뜻합니다.
+// 주로 클라이언트 localhost:3000 API는 localhost:8000이면 cors가 발생이된다. 
+const cors = require("cors");
+
+let corsOptions = {
+  origin: "*", // 출처 허용 옵션
+  credential: true, // 사용자 인증이 필요한 리소스(쿠키 ..등) 접근
+};
+
+app.use(cors(corsOptions));
+
 const dbConnect = mysql.createPool({ // DB 연동시 위한 코드 
   host: "localhost",
   user: "root",
