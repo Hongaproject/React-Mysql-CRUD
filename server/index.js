@@ -13,10 +13,11 @@ const cors = require("cors");
 
 let corsOptions = {
   origin: "*", // 출처 허용 옵션
-  credential: true, // 사용자 인증이 필요한 리소스(쿠키 ..등) 접근
+  credential: true, // 사용자 인증이 필요한 리소스(쿠키 ..등) 접근 가능하다
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); // 옵션을 설정함
+// app.use(cors()); // 모든 도메인에서 제한 없이 요청보내고 응답받기 가능.
 
 const dbConnect = mysql.createPool({ // DB 연동시 위한 코드 
   host: "localhost",
