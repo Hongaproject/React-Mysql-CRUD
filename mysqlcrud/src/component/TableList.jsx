@@ -1,24 +1,30 @@
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import Axios from "axios";  
+import Contents from "./Contents";
+import { useEffect, useState } from "react";
 
 function TableList () {
 
-    const onSubmit = () => {
-        Axios.get("http://localhost:8000/", {}).then(() => {
-            alert("등록 완료");
-        });
-    };
+    const [contents, setContents] = useState([]);
+
+    useEffect(() => {
+        const onSubmit = () => {
+            Axios.get("http://localhost:8000/list", {})
+            .then((res) => {
+                setContents(res.data);
+            })
+            .catch((err)=>{
+                console.log(err);
+            });
+        }
+        onSubmit();
+    }, [contents]);
     
     return(
         // 테이블 보여주는 컴포넌트 bootstrap사용하여 테이블 완성.
         <div>
             <Table striped bordered hover>
-                <col width="10%"/>
-                <col width="10%"/>
-                <col width="60%"/>
-                <col width="10%"/>
-                <col width="10%"/>
                 <thead>
                     <tr>
                         <th>선택</th>
@@ -29,25 +35,15 @@ function TableList () {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* onSubmit.map */}
-                    <tr>
-                        <th><input type="checkbox" /></th>
-                        <td>1</td>
-                        <td>안녕하세요.</td>
-                        <td>홍가</td>
-                        <td>2023-09-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox" /></th>
-                        <td>2</td>
-                        <td>누구세요.</td>
-                        <td>팬더</td>
-                        <td>2023-09-13</td>
-                    </tr>
+                    {
+                        // eslint-disable-next-line array-callback-return
+                        contents.map((User)=> (
+                            <Contents User={User}/>
+                    ))}
                 </tbody>
             </Table>
             <div className="text-center mb-3">
-                <Button variant="success" onClick={onSubmit}>글쓰기</Button>
+                <Button variant="success">글쓰기</Button>
                 <Button variant="secondary">수정하기</Button>
                 <Button variant="warning">삭제하기</Button>
                 <button variant="warning">삭제하기</button>
