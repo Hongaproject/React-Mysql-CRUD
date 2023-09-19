@@ -14,12 +14,18 @@ function TableList () {
             .then((res) => {
                 setContents(res.data);
             })
-            .catch((err)=>{
-                console.log(err);
-            });
-        }
+            .catch(err => console.log(err)
+        )}
         onSubmit();
     }, [contents]);
+    
+    // useEffect(() => {
+    //     Axios.get("http://localhost:8000/list", {})
+    //     .then((res) => {
+    //         setContents(res.data);
+    //     })
+    //     .catch(err => console.log(err))
+    // }, [contents]);
     
     return(
         // 테이블 보여주는 컴포넌트 bootstrap사용하여 테이블 완성.
@@ -37,16 +43,22 @@ function TableList () {
                 <tbody>
                     {
                         // eslint-disable-next-line array-callback-return
-                        contents.map((User)=> (
-                            <Contents User={User}/>
-                    ))}
+                        contents.map((User) => {
+                            return(
+                                <Contents 
+                                number={User.USER_NUMBER}
+                                title={User.USER_TITLE}
+                                userId={User.USER_ID}
+                                userIdDate={User.USERID_DATE}
+                                />
+                            );
+                        })}
                 </tbody>
             </Table>
             <div className="text-center mb-3">
                 <Button variant="success">글쓰기</Button>
                 <Button variant="secondary">수정하기</Button>
                 <Button variant="warning">삭제하기</Button>
-                <button variant="warning">삭제하기</button>
             </div>
         </div>
     );
