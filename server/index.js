@@ -26,22 +26,9 @@ const dbConnect = mysql.createPool({ // DB 연동시 위한 코드
   database: "bbs",
 });
 
-// app.get("/", (req, res) => { // 서버와 통신이 되는지 확인 
-//   //console.log("chech."); // 서버와 통신이 되는지 확인 
-  
-// const sqlQuery = "INSERT INTO chech (test) VALUES (1)"; // DB 연동시 위한 코드 
-//   dbConnect.query(sqlQuery, (err, result) => {
-//     console.log(err);
-//     res.send("success!");
-//   });
-// });
-
 app.get("/list", (req, res) => { // 서버와 통신이 되는지 확인 
-  //console.log("chech."); // 서버와 통신이 되는지 확인 
-  
-// const sqlQuery = "SELECT *FROM USER;"; // DB 연동시 위한 코드 
-  const sqlQuery = "SELECT USER_NUMBER, USER_TITLE, USER_ID, DATE_FORMAT(USERID_DATE, '%Y-%m-%d') AS USERID_DATE FROM USER;";    
-  dbConnect.query(sqlQuery, (err, result) => {
+  const userQuery = "SELECT USER_NUMBER, USER_TITLE, USER_ID, DATE_FORMAT(USERID_DATE, '%Y-%m-%d') AS USERID_DATE FROM USER;"; // 오늘 날짜 및 내용 가져오기 위해 사용됨.
+  dbConnect.query(userQuery, (err, result) => {
     res.send(result);
   });
 });
