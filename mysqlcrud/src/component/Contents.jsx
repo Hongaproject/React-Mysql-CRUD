@@ -4,13 +4,13 @@ function Contents ({ number, title, userId, userIdDate }) {
 
     return(
         // 번호, 제목, 작성자, 작성일
-            <tr>
-                <td><input type="checkbox" /></td>
-                <td>{number}</td>
-                <td>{title}</td>
-                <td>{userId}</td>
-                <td>{userIdDate}</td>
-            </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>{number}</td>
+            <td>{title}</td>
+            <td>{userId}</td>
+            <td>{userIdDate}</td>
+        </tr> 
     );
 }
 

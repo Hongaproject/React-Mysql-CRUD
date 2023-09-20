@@ -14,18 +14,11 @@ function TableList () {
             .then((res) => {
                 setContents(res.data);
             })
-            .catch(err => console.log(err)
-        )}
+            .catch(err => console.log(err))
+        };
         onSubmit();
     }, [contents]);
-    
-    // useEffect(() => {
-    //     Axios.get("http://localhost:8000/list", {})
-    //     .then((res) => {
-    //         setContents(res.data);
-    //     })
-    //     .catch(err => console.log(err))
-    // }, [contents]);
+
     
     return(
         // 테이블 보여주는 컴포넌트 bootstrap사용하여 테이블 완성.
@@ -50,9 +43,10 @@ function TableList () {
                                 title={User.USER_TITLE}
                                 userId={User.USER_ID}
                                 userIdDate={User.USERID_DATE}
+                                key={User.USER_NUMBER}
                                 />
                             );
-                        })}
+                        })};
                 </tbody>
             </Table>
             <div className="text-center mb-3">
