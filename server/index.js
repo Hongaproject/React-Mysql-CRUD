@@ -41,7 +41,7 @@ app.post("/insert", (req, res) => { // 화면에서 DB로 내용을 넣어주는
   const title = req.body.title;
   const content = req.body.content;
   
-  const userQuery = "INSERT INTO USER (USER_TITLE, USER_CONTENT, USER_ID) VALUES (?,?,작성자);"; // DB에 내용 넣기위해 작성
+  const userQuery = "INSERT INTO USER (USER_TITLE, USER_CONTENT, USER_ID) VALUES (?, ?, '작성자');"; // DB에 내용 넣기위해 작성
   dbConnect.query(userQuery, [title, content], (err, result) => {
     res.send(result);
   });
@@ -51,7 +51,7 @@ app.post("/update", (req, res) => { // 화면에서 DB로 내용을 넣어주는
   const title = req.body.title;
   const content = req.body.content;
   
-  const userQuery = "UPDATE USER SET USER_TITLE = ? USER_CONTENT = ? USER_UPDATE) VALUES (?,?,작성자);"; // DB에 내용 넣기위해 작성
+  const userQuery = "UPDATE USER SET USER_TITLE = ? USER_CONTENT = ? USER_UPDATE) VALUES (?,?,'작성자');"; // DB에 내용 넣기위해 작성
   dbConnect.query(userQuery, [title, content], (err, result) => {
     res.send(result);
   });
