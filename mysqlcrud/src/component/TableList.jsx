@@ -45,14 +45,14 @@ function TableList () {
                                 userIdDate={User.USERID_DATE}
                                 key={User.USER_NUMBER}
                                 />
-                            );
-                        })};
+                            )
+                        })}
                 </tbody>
             </Table>
             <div className="text-center mb-3">
                 <Button variant="success">글쓰기</Button>
                 <Button variant="secondary">수정하기</Button>
-                <Button variant="warning">삭제하기</Button>
+                <Button variant="danger">삭제하기</Button>
             </div>
         </div>
     );

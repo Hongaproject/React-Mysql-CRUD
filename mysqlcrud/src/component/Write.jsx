@@ -6,22 +6,17 @@ import { Form } from "react-bootstrap";
 function Write () {
 
     const [posting, setPosting] = useState({
-        modify: false,
+        modufy: true,
         title: "",
         content: ""
     });
 
-    const onChange = (e) => {
-        const {name, value} = e.target;
-        setPosting({
-            [name]: value
-        })
-    }
+    const { title, content } = posting;
 
-    const createWrite = () => {
+    const onCreateWrite = () => {
         Axios.post("http://localhost:8000/insert", {
-            title: posting.title,
-            content: posting.content
+            title,
+            content
         }) 
         .then((res) => {
             console.log(res);
@@ -29,7 +24,7 @@ function Write () {
         .catch(err => console.log(err))
     };
 
-    const update = () => {
+    const onUpdate = () => {
         Axios.post("http://localhost:8000/update", {
             title: posting.title,
             content: posting.content
@@ -39,6 +34,14 @@ function Write () {
         })
         .catch(err => console.log(err))
     }
+
+    const onChange = (e) => {
+        const {name, value} = e.target;
+        setPosting({
+            ...posting,
+            [name]: value
+        });
+    };
 
     return(
         <div>
@@ -67,8 +70,8 @@ function Write () {
                 </div>
             </Form>
             <div className="text-center">
-                <Button variant="primary" onClick={posting.modify ? createWrite : update}>작성하기</Button>
-                <Button variant="secondary">취소</Button>
+                <Button variant="primary" onClick={posting.modufy ? onCreateWrite : onUpdate}>작성하기</Button>
+                <Button variant="warning">취소</Button>
             </div>
         </div>
     );
