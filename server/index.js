@@ -47,11 +47,11 @@ app.post("/insert", (req, res) => { // 화면에서 DB로 내용을 넣어주는
   });
 });
 
-app.post("/update", (req, res) => { // 화면에서 DB로 내용을 넣어주는 코드
+app.post("/update", (req, res) => { // 화면에서 DB로 내용을 넣어주고 수정을 할 수 있게 해주는 코드
   const title = req.body.title;
   const content = req.body.content;
   
-  const userQuery = "UPDATE USER SET USER_TITLE = ? USER_CONTENT = ? USER_UPDATE) VALUES (?,?,'작성자');"; // DB에 내용 넣기위해 작성
+  const userQuery = "UPDATE USER SET USER_TITLE = ? USER_CONTENT = ? USER_UPDATE) VALUES (?,?,'작성자');"; // DB에 내용 넣고 수정을 가능하게 해줌.
   dbConnect.query(userQuery, [title, content], (err, result) => {
     res.send(result);
   });
