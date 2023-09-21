@@ -2,6 +2,7 @@
 const express = require("express"); 
 const app = express();
 const PORT = process.env.port || 8000;
+const bodyParser = require("body-parser");
 
 // DB 연동시 위한 코드 
 const mysql = require("mysql");
@@ -26,9 +27,32 @@ const dbConnect = mysql.createPool({ // DB 연동시 위한 코드
   database: "bbs",
 });
 
-app.get("/list", (req, res) => { // 서버와 통신이 되는지 확인 
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.get("/list", (req, res) => { // DB에 있는 내용 보여주는 코드
   const userQuery = "SELECT USER_NUMBER, USER_TITLE, USER_ID, DATE_FORMAT(USERID_DATE, '%Y-%m-%d') AS USERID_DATE FROM USER;"; // 오늘 날짜 및 내용 가져오기 위해 사용됨.
   dbConnect.query(userQuery, (err, result) => {
+    res.send(result);
+  });
+});
+
+app.post("/insert", (req, res) => { // 화면에서 DB로 내용을 넣어주는 코드
+  const title = req.body.title;
+  const content = req.body.content;
+  
+  const userQuery = "INSERT INTO USER (USER_TITLE, USER_CONTENT, USER_ID) VALUES (?,?,작성자);"; // DB에 내용 넣기위해 작성
+  dbConnect.query(userQuery, [title, content], (err, result) => {
+    res.send(result);
+  });
+});
+
+app.post("/update", (req, res) => { // 화면에서 DB로 내용을 넣어주는 코드
+  const title = req.body.title;
+  const content = req.body.content;
+  
+  const userQuery = "UPDATE USER SET USER_TITLE = ? USER_CONTENT = ? USER_UPDATE) VALUES (?,?,작성자);"; // DB에 내용 넣기위해 작성
+  dbConnect.query(userQuery, [title, content], (err, result) => {
     res.send(result);
   });
 });
@@ -36,4 +60,6 @@ app.get("/list", (req, res) => { // 서버와 통신이 되는지 확인
 app.listen(PORT, ()=>{ // 서버와 통신이 되는지 확인 
     console.log(`running on port ${PORT}`);
 });
+
+
 
