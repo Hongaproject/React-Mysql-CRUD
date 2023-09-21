@@ -5,17 +5,18 @@ import { Form } from "react-bootstrap";
 
 function Write () {
 
-    const [posting, setPosting] = useState({
+    const [posting, setPosting] = useState({ // 하나의 useState에 여러개 사용
         modufy: true,
         title: "",
         content: ""
     });
 
-    const { title, content } = posting;
+    const { title, content } = posting; // 값이 여러개 일 때 구조분해할당을 하여 사용한다.
 
     const onCreateWrite = () => {
         Axios.post("http://localhost:8000/insert", {
-            title,
+            title, // 구조분해할당시에 이렇게 사용
+            // title: posting.title, // 구조분해할당을 사용하지 않을때 사용 법 사용을 해본결과 오류가 나타남.
             content
         }) 
         .then((res) => {
@@ -26,8 +27,8 @@ function Write () {
 
     const onUpdate = () => {
         Axios.post("http://localhost:8000/update", {
-            title: posting.title,
-            content: posting.content
+            title,
+            content
         }) 
         .then((res) => {
             console.log(res);
@@ -36,9 +37,9 @@ function Write () {
     }
 
     const onChange = (e) => {
-        const {name, value} = e.target;
+        const {name, value} = e.target; // input부분에 name을 가져오고 입력값대로 value값이 생성이된다.
         setPosting({
-            ...posting,
+            ...posting, // spread문법 posting부분을 복사를 하고 name과 value값을 받아옴.
             [name]: value
         });
     };
@@ -51,7 +52,7 @@ function Write () {
                     <input 
                         type="text" 
                         name="title"
-                        value={posting.title}
+                        value={title} 
                         class="form-control" 
                         placeholder="제목을 입력해주세요." 
                         onChange={onChange}
@@ -62,7 +63,7 @@ function Write () {
                     <input 
                         type="textarea" 
                         name="content"
-                        value={posting.content}
+                        value={posting.content} // posting안에 content값이 있어서 이렇게 사용 하지만 구조분해할당을 사용했기에 content로 해도 사용이 가능하다.
                         class="form-control" 
                         placeholder="내용을 입력해주세요." 
                         onChange={onChange}
