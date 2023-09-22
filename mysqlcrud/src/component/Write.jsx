@@ -13,7 +13,7 @@ function Write () {
 
     const { title, content } = posting; // 값이 여러개 일 때 구조분해할당을 하여 사용한다.
 
-    const onCreateWrite = () => {
+    const onCreateWrite = () => { // db에 내용을 생성하는 코드
         Axios.post("http://localhost:8000/insert", {
             title, // 구조분해할당시에 이렇게 사용
             // title: posting.title, // 구조분해할당을 사용하지 않을때 사용 법 사용을 해본결과 오류가 나타남.
@@ -25,7 +25,7 @@ function Write () {
         .catch(err => console.log(err))
     };
 
-    const onUpdate = () => {
+    const onUpdate = () => { // db에 넣은 내용을 수정하는 코드
         Axios.post("http://localhost:8000/update", {
             title,
             content
