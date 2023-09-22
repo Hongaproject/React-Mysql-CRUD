@@ -6,7 +6,7 @@ import { Form } from "react-bootstrap";
 function Write () {
 
     const [posting, setPosting] = useState({ // 하나의 useState에 여러개 사용
-        modufy: true,
+        isModify: true,
         title: "",
         content: ""
     });
@@ -71,7 +71,7 @@ function Write () {
                 </div>
             </Form>
             <div className="text-center">
-                <Button variant="primary" onClick={posting.modufy ? onCreateWrite : onUpdate}>작성하기</Button>
+                <Button variant="primary" onClick={posting.isModify ? onCreateWrite : onUpdate}>작성하기</Button>
                 <Button variant="warning">취소</Button>
             </div>
         </div>
