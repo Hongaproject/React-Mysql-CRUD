@@ -30,6 +30,7 @@ const dbConnect = mysql.createPool({ // DB 연동시 위한 코드
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// Mysql내용을 화면에 보여주는 서버 API코드 
 app.get("/list", (req, res) => { // DB에 있는 내용 보여주는 코드
   const userQuery = "SELECT USER_NUMBER, USER_TITLE, USER_ID, DATE_FORMAT(USERID_DATE, '%Y-%m-%d') AS USERID_DATE FROM USER;"; // 오늘 날짜 및 내용 가져오기 위해 사용됨.
   dbConnect.query(userQuery, (err, result) => {
@@ -37,16 +38,18 @@ app.get("/list", (req, res) => { // DB에 있는 내용 보여주는 코드
   });
 });
 
+// Mysql테이블에 내용을 추가해주는 서버 API코드
 app.post("/insert", (req, res) => { // 화면에서 DB로 내용을 넣어주는 코드
   const title = req.body.title;
   const content = req.body.content;
   
-  const userQuery = "INSERT INTO USER (USER_TITLE, USER_CONTENT, USER_ID) VALUES (?, ?, '작성자');"; // DB에 내용 넣기위해 작성
+  const userQuery = "INSERT INTO USER (USER_TITLE, USER_CONTENT, USER_ID) VALUES (?, ?, '작성자');"; // DB에 내용 넣기위해 작성 ? ? 부분은 나중에 넣는다는 뜻
   dbConnect.query(userQuery, [title, content], (err, result) => {
     res.send(result);
   });
 });
 
+// Mysql테이블에 추가한 내용을 수정해주는 서버 API코드
 app.post("/update", (req, res) => { // 화면에서 DB로 내용을 넣어주고 수정을 할 수 있게 해주는 코드
   const title = req.body.title;
   const content = req.body.content;
