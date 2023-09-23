@@ -7,10 +7,6 @@ import { useEffect, useState } from "react";
 function TableList () {
 
     const [contents, setContents] = useState([]); // mysql은 테이블로 되어있어 배열로 받아야함. 화면에 보여지는 역할을 함.
-    const [checkBox, setCheckBox] = useState([]);
-    const [together, setTogether] = useState({
-
-    });
 
     useEffect(() => { // 서버에서 데이터를 받아와야해서 사용을 했습니다. 
         const onSubmit = () => { // mysql테이블 내용을 화면에 보여지게 해줌.
@@ -23,22 +19,6 @@ function TableList () {
         onSubmit();
     }, [contents]); // []에 값이 없으면 1번만 렌더링되기에 값이 불러오지지 않습니다.
     // 값을 넣어서 contents값이 수정이 될 때 마다 렌더링이 되기에 업데이트가 되는 모습을 확인 할 수 있습니다.
-
-    useEffect(() => {
-        const onCheckBox = (checked, id) => {
-            const box = checkBox.filter((v) => {
-                // eslint-disable-next-line eqeqeq
-                return v != id;
-            });
-    
-            if(checked){
-                box.push(id);
-            }
-
-            setCheckBox(box);
-        }
-        onCheckBox();
-    }, [checkBox]);
 
     
     return(
@@ -65,7 +45,6 @@ function TableList () {
                                 userId={User.USER_ID}
                                 userIdDate={User.USERID_DATE}
                                 key={User.USER_NUMBER}
-                                props={this}
                                 />
                             )
                         })}
@@ -73,7 +52,7 @@ function TableList () {
             </Table>
             <div className="text-center mb-3">
                 <Button variant="success">글쓰기</Button>
-                <Button variant="secondary" onClick={checkBox}>수정하기</Button>
+                <Button variant="secondary">수정하기</Button>
                 <Button variant="danger">삭제하기</Button>
             </div>
         </div>
