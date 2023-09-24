@@ -8,6 +8,9 @@ function TableList () {
 
     const [contents, setContents] = useState([]); // mysql은 테이블로 되어있어 배열로 받아야함. 화면에 보여지는 역할을 함.
     const [checkBox, setCheckBox] = useState([]);
+    const [together, setTogether] = useState({
+
+    });
 
     useEffect(() => { // 서버에서 데이터를 받아와야해서 사용을 했습니다. 
         const onSubmit = () => { // mysql테이블 내용을 화면에 보여지게 해줌.
