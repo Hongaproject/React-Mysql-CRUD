@@ -27,11 +27,11 @@ function TableList () {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>선택</th>
                         <th>번호</th>
                         <th>제목</th>
                         <th>작성자</th>
                         <th>작성일</th>
+                        <th>수정/삭제</th>
                     </tr>
                 </thead>
                 <tbody>
