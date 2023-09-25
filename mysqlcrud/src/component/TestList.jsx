@@ -103,6 +103,11 @@ function TestList() {
         //
         <div>
             <Table striped bordered hover>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="10%"/>
                 <thead>
                     <tr>
                         <th>번호</th>

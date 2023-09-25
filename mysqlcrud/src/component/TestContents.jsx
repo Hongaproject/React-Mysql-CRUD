@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-function TestContents ({ list, onSubmit, viewDetail, viewDetailUpdate}) {
+function TestContents ({ list, onSubmit, viewDetail, viewDetailUpdate }) {
     // table에 tbody부분에 mysql과 연동을 시켜 내용을 보여줌.
 
     const onDelete = (e) => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
-function TestWrite() {
+function TestWrite({ onSubmit }) {
     // 구조를 바꿔서 작성을 해보기 위해 테스트 파일 진행 중.
 
     return(
