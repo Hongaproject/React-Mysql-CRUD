@@ -8,7 +8,7 @@ function TestList() {
     // 구조를 바꿔서 모드를 넣어 작성 수정 등을 해보려고 테스트 파일을 만듬.
 
     const [contents, setContents] = useState([]); // mysql은 테이블로 되어있어 배열로 받아야함. 화면에 보여주는 역할
-    const [list, setList] = useState({ 
+    const [list, setList] = useState({ // list를 통해 글 및 수정시에 도움을 줌 
         user_number: 0,
         user_title: "",
         user_content: "",
@@ -17,6 +17,7 @@ function TestList() {
     })
     const [actionMode, setActionMode] = useState({ mode: 0 }); // 모드를 적용하여 작성 및 수정 등을 하게 해줌.
 
+    // get과 post차이는 서버에서 데이트를 받아 올 때 사용이 됨. get은 조회 post는 수정 및 생성 역할을 함.
         const onSubmit = () => { // mysql테이블 내용을 화면에 보여지게 해줌.
             Axios.get("http://localhost:8000/list", {})
             .then((res) => { // server -> index.js에 있는 res로 전달을 받음.
@@ -39,7 +40,7 @@ function TestList() {
         .then((res) => {
             const {data} = res;
             if(res.data.length > 0){
-                setList({
+                setList({ // list로 생성해놓은 부분을 통해 data를 받아옴.
                     ...list,
                     user_number: data.USER_NUMBER, // Key는 대문자로 되어 있어서 대문자 사용
                     user_title: data.USER_TITLE,
