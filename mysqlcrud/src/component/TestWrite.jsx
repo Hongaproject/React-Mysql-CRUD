@@ -3,11 +3,30 @@ import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
-function TestWrite({ onSubmit }) {
+function TestWrite() {
     // 구조를 바꿔서 작성을 해보기 위해 테스트 파일 진행 중.
 
     const titleWrite = useRef(); // Ref를 사용하여 접근하려고 사용함.
     const contentWrite = useRef();
+
+    const [text, setText] = useState({
+        title: "",
+        content: ""
+    });
+
+    const {title, content} = text;
+
+    const onChange = (e) => {
+        const {name, value} = e.target;
+        setText({
+            ...text,
+            [name]: value
+        });
+    };
+
+    const onReset = () => {
+        setText("");
+    }
 
     const onInsert = () => {
         if(titleWrite.current.value === "" || titleWrite.current.value === undefined){
@@ -22,13 +41,11 @@ function TestWrite({ onSubmit }) {
         }
 
         Axios.post("http://localhost:8000/insert", {
-            title: titleWrite.current.value,
-            content: contentWrite.current.value,
+            title,
+            content
         })
-        .then(() => {
-            onSubmit();
-            titleWrite.current.value = "";
-            contentWrite.current.value = "";
+        .then((res) => {
+            console.log(res);
         })
         .catch((err) => {
             console.log(err);
@@ -43,6 +60,8 @@ function TestWrite({ onSubmit }) {
                     <input 
                         type="text" 
                         name="title"
+                        value={title}
+                        onChange={onChange}
                         class="form-control" 
                         placeholder="제목을 입력해주세요." 
                         ref={titleWrite}
@@ -53,16 +72,18 @@ function TestWrite({ onSubmit }) {
                     <input 
                         type="text" 
                         name="content"
+                        value={content}
+                        onChange={onChange}
                         class="form-control" 
                         placeholder="내용을 입력해주세요." 
                         ref={contentWrite}
                     />
                 </div>
+                <div className="text-center">
+                    <Button variant="primary" onClick={onInsert}>작성하기</Button>
+                    <Button variant="warning" type="reset" onClick={onReset}>취소</Button>
+                </div>
             </Form>
-            <div className="text-center">
-                <Button variant="primary" onClick={onInsert}>작성하기</Button>
-                <Button variant="warning" type="reset">취소</Button>
-            </div>
         </div>
     );
 }
