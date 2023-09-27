@@ -17,7 +17,7 @@ function TestList() {
     })
     const [actionMode, setActionMode] = useState({ mode: 0 }); // 모드를 적용하여 작성 및 수정 등을 하게 해줌.
 
-    // get과 post차이는 서버에서 데이트를 받아 올 때 사용이 됨. get은 조회 post는 수정 및 생성 역할을 함.
+    // get과 post차이는 서버에서 데이터를 받아 올 때 사용이 됨. get은 조회 post는 수정 및 생성 역할을 함.
         const onSubmit = () => { // mysql테이블 내용을 화면에 보여지게 해줌.
             Axios.get("http://localhost:8000/list", {})
             .then((res) => { // server -> index.js에 있는 res로 전달을 받음.
@@ -98,7 +98,7 @@ function TestList() {
 
     useEffect(() => {
         onSubmit();
-    }, []);
+    }, [contents]);
 
     return(
         //
@@ -135,8 +135,6 @@ function TestList() {
             </Table>
             <div className="text-center mb-3">
                 <Button variant="success">글쓰기</Button>
-                <Button variant="secondary">수정하기</Button>
-                <Button variant="danger">삭제하기</Button>
             </div>
         </div>
     );

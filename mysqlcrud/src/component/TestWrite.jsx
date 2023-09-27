@@ -10,9 +10,30 @@ function TestWrite({ onSubmit }) {
     const contentWrite = useRef();
 
     const onInsert = () => {
+        if(titleWrite.current.value === "" || titleWrite.current.value === undefined){
+            alert("제목을 입력해주세요.");
+            titleWrite.current.focus();
+            return false;
+        }
+        if(contentWrite.current.value === "" || contentWrite.current.value === undefined){
+            alert("내용을 입력해주세요.");
+            contentWrite.current.focus();
+            return false;
+        }
 
-    }
-
+        Axios.post("http://localhost:8000/insert", {
+            title: titleWrite.current.value,
+            content: contentWrite.current.value,
+        })
+        .then(() => {
+            onSubmit();
+            titleWrite.current.value = "";
+            contentWrite.current.value = "";
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }   
 
     return(
         <div>
@@ -40,7 +61,7 @@ function TestWrite({ onSubmit }) {
             </Form>
             <div className="text-center">
                 <Button variant="primary" onClick={onInsert}>작성하기</Button>
-                <Button variant="warning">취소</Button>
+                <Button variant="warning" type="reset">취소</Button>
             </div>
         </div>
     );
