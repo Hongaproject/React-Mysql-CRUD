@@ -1,4 +1,5 @@
 import { Table } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 function TestViewDetail ({ list, onSubmit }) {
     // 게시판 제목을 누르면 내용이 보이게 해줌.
@@ -7,19 +8,29 @@ function TestViewDetail ({ list, onSubmit }) {
         <div>
             <Table>
                 <tr>
-                    <td>제목</td>
+                    <td>번호</td>
+                    <td>{list.USER_NUMBER}</td>
+                </tr>
+                <tr>
+                    <td>번호</td>
+                    <td>{list.USER_TITLE}</td>
                 </tr>
                 <tr>
                     <td>작성자</td>
+                    <td>{list.USER_ID}</td>
                 </tr>
                 <tr>
                     <td>날짜</td>
+                    <td>{list.USERID_DATE}</td>
                 </tr>
                 <tr>
                     <td>내용</td>
+                    <td>{list.USER_CONTENT}</td>
                 </tr>
                 <tr>
-                    <td>글목록</td>
+                    <td>
+                        <Button variant="info" onClick={onSubmit}>글목록</Button>
+                    </td>
                 </tr>
             </Table>
         </div>
