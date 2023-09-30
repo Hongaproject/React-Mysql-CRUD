@@ -5,6 +5,12 @@ import { Button } from "react-bootstrap";
 function TestUpdate ({ list, setList, onUpdate}) {
     // 글 수정하는 컴포넌트.
 
+    const onChange = (e) => {
+        setList({
+            ...list,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return(
         <div>
@@ -13,7 +19,7 @@ function TestUpdate ({ list, setList, onUpdate}) {
                     <tr>
                         <td>제목</td>
                         <td>
-                            <input type="text" />
+                            <input type="text" name="user_title" value={list.user_title} onChange={onChange}/>
                             {list.USER_TITLE}
                         </td>
                     </tr>
@@ -24,7 +30,7 @@ function TestUpdate ({ list, setList, onUpdate}) {
                     <tr>
                         <td>내용</td>
                         <td>
-                            <input type="text" />
+                            <input type="text" name="user_content" value={list.user_content} onChange={onChange}/>
                             {list.USER_CONTENT}
                         </td>
                     </tr>
