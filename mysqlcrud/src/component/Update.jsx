@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 
-function TestUpdate ({ list, setList, onUpdate}) {
+function Update ({ list, setList, onUpdate}) {
     // 글 수정하는 컴포넌트.
 
     const onChange = (e) => {
@@ -45,4 +45,4 @@ function TestUpdate ({ list, setList, onUpdate}) {
     );
 }
 
-export default TestUpdate;
+export default Update;

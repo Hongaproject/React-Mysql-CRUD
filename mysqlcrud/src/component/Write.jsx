@@ -1,48 +1,56 @@
 import Axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
-function Write () {
+function Write() {
+    // 구조를 바꿔서 작성을 해보기 위해 테스트 파일 진행 중.
 
-    const [posting, setPosting] = useState({ // 하나의 useState에 여러개 사용
-        isModify: true,
+    const titleWrite = useRef(); // Ref를 사용하여 접근하려고 사용함.
+    const contentWrite = useRef();
+
+    const [text, setText] = useState({
         title: "",
         content: ""
     });
 
-    const { title, content } = posting; // 값이 여러개 일 때 구조분해할당을 하여 사용한다.
-
-    const onCreateWrite = () => { // db에 내용을 생성하는 코드
-        Axios.post("http://localhost:8000/insert", {
-            title, // 구조분해할당시에 이렇게 사용
-            // title: posting.title, // 구조분해할당을 사용하지 않을때 사용 법 사용을 해본결과 오류가 나타남.
-            content
-        }) 
-        .then((res) => {
-            console.log(res);
-        })
-        .catch(err => console.log(err))
-    };
-
-    const onUpdate = () => { // db에 넣은 내용을 수정하는 코드
-        Axios.post("http://localhost:8000/update", {
-            title,
-            content
-        }) 
-        .then((res) => {
-            console.log(res);
-        })
-        .catch(err => console.log(err))
-    }
+    const {title, content} = text;
 
     const onChange = (e) => {
-        const {name, value} = e.target; // input부분에 name을 가져오고 입력값대로 value값이 생성이된다.
-        setPosting({
-            ...posting, // spread문법 posting부분을 복사를 하고 name과 value값을 받아옴.
+        const {name, value} = e.target;
+        setText({
+            ...text,
             [name]: value
         });
     };
+
+    const onReset = () => {
+        setText("");
+    }
+
+    const onInsert = () => {
+        if(titleWrite.current.value === "" || titleWrite.current.value === undefined){
+            alert("제목을 입력해주세요.");
+            titleWrite.current.focus();
+            return false;
+        }
+        if(contentWrite.current.value === "" || contentWrite.current.value === undefined){
+            alert("내용을 입력해주세요.");
+            contentWrite.current.focus();
+            return false;
+        }
+
+        Axios.post("http://localhost:8000/insert", {
+            title,
+            content
+        })
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }   
 
     return(
         <div>
@@ -52,28 +60,30 @@ function Write () {
                     <input 
                         type="text" 
                         name="title"
-                        value={title} 
+                        value={title}
+                        onChange={onChange}
                         class="form-control" 
                         placeholder="제목을 입력해주세요." 
-                        onChange={onChange}
+                        ref={titleWrite}
                     /> 
                 </div>
                 <div class="form-group mb-3">
                     <label>내용</label>
                     <input 
-                        type="textarea" 
+                        type="text" 
                         name="content"
-                        value={posting.content} // posting안에 content값이 있어서 이렇게 사용 하지만 구조분해할당을 사용했기에 content로 해도 사용이 가능하다.
+                        value={content}
+                        onChange={onChange}
                         class="form-control" 
                         placeholder="내용을 입력해주세요." 
-                        onChange={onChange}
+                        ref={contentWrite}
                     />
                 </div>
+                <div className="text-center">
+                    <Button variant="primary" onClick={onInsert}>작성하기</Button>
+                    <Button variant="warning" type="reset" onClick={onReset}>취소</Button>
+                </div>
             </Form>
-            <div className="text-center">
-                <Button variant="primary" onClick={posting.isModify ? onCreateWrite : onUpdate}>작성하기</Button>
-                <Button variant="warning">취소</Button>
-            </div>
         </div>
     );
 }

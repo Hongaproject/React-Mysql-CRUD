@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 
-function TestViewDetail ({ list, onSubmit }) {
+function ViewDetail ({ list, onSubmit }) {
     // 게시판 제목을 누르면 내용이 보이게 해줌.
 
     return(
@@ -37,4 +37,4 @@ function TestViewDetail ({ list, onSubmit }) {
     );
 }
 
-export default TestViewDetail;
+export default ViewDetail;
