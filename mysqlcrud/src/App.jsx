@@ -100,13 +100,15 @@ function App() {
     <div>
       Mysql 사용해서 게시판 만들기.
       bootstrap을 사용해서 게시판 디자인을 함.
-      <TableList
-        contents={contents}
-        list={list}
-        onSubmit={onSubmit}
-        viewDetail={viewDetail}
-        viewDetailUpdate={viewDetailUpdate}
-      ></TableList>
+      <div>
+        <TableList
+            contents={contents}
+            onSubmit={onSubmit}
+            viewDetail={viewDetail}
+            viewDetailUpdate={viewDetailUpdate}
+        ></TableList>
+      </div>
+      
       <Write></Write>
     </div>
   );

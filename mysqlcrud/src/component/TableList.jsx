@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Contents from "./Contents";
 
-function TableList({contents, list, onSubmit, viewDetail, viewDetailUpdate}) {
+function TableList({contents, onSubmit, viewDetail, viewDetailUpdate}) {
     // 구조를 바꿔서 모드를 넣어 작성 수정 등을 해보려고 테스트 파일을 만듬.
 
     useEffect(() => {
@@ -31,11 +31,11 @@ function TableList({contents, list, onSubmit, viewDetail, viewDetailUpdate}) {
                 <tbody>
                     {
                         // eslint-disable-next-line array-callback-return
-                        contents.map((detail) => {
+                        contents.map((list) => {
                             return(
                                 <Contents
-                                    detail={detail}
                                     list={list}
+                                    key={list.USER_NUMBER}
                                     onSubmit={onSubmit}
                                     viewDetail={viewDetail}
                                     viewDetailUpdate={viewDetailUpdate}
