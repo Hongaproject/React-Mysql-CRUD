@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
-function Write() {
+function Write({ onSubmit, writeMode, onWriteMode}) {
     // 구조를 바꿔서 작성을 해보기 위해 테스트 파일 진행 중.
 
     const titleWrite = useRef(); // Ref를 사용하여 접근하려고 사용함.
@@ -50,19 +50,23 @@ function Write() {
         .catch((err) => {
             console.log(err);
         })
+        onSubmit();
     }   
 
     return(
         <div>
             <Form>
-                <div class="form-group mb-3">
+                <div className="mt-3 mb-3">
+                    <Button onClick={() => onWriteMode(writeMode)}>뒤로가기</Button>
+                </div>
+                <div className="form-group mb-3">
                     <label>제목</label>
                     <input 
                         type="text" 
                         name="title"
                         value={title}
                         onChange={onChange}
-                        class="form-control" 
+                        className="form-control" 
                         placeholder="제목을 입력해주세요." 
                         ref={titleWrite}
                     /> 
@@ -74,7 +78,7 @@ function Write() {
                         name="content"
                         value={content}
                         onChange={onChange}
-                        class="form-control" 
+                        className="form-control" 
                         placeholder="내용을 입력해주세요." 
                         ref={contentWrite}
                     />
