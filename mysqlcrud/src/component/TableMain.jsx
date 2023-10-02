@@ -19,6 +19,7 @@ function TableMain() {
     })
     const [actionMode, setActionMode] = useState({ mode: 0 }); // 모드를 적용하여 작성 및 수정 등을 하게 해줌.
 
+    useEffect(() => {}, []);
     // get과 post차이는 서버에서 데이터를 받아 올 때 사용이 됨. get은 조회 post는 수정 및 생성 역할을 함.
         const onSubmit = () => { // mysql테이블 내용을 화면에 보여지게 해줌.
             Axios.get("http://localhost:8000/list", {})
@@ -99,40 +100,17 @@ function TableMain() {
         .catch(err => console.log(err))
     }
 
-    if(actionMode.mode === 0){
-        return (
-            <div>
-                <TableList
-                    contents={contents}
-                    actionMode={actionMode}
-                    onSubmit={onSubmit}
-                    viewDetail={viewDetail}
-                    viewDetailUpdate={viewDetailUpdate}
-                ></TableList>
-            </div>
-        );
-    } else if(actionMode.mode === 1){
-        return (
-            <div>
-                <ViewDetail
-                    list={list}
-                    onSubmit={onSubmit}
-                    viewDetailUpdate={viewDetailUpdate}
-                ></ViewDetail>
-            </div>
-        );
-    } else if(actionMode.mode === 2){
-        return (
-            <div>
-                <Update
-                    list={list}
-                    setList={setList}
-                    onUpdate={onUpdate}
-                ></Update>
-            </div>
-        );
-    } 
-    
-}
+    return (
+        <div>
+            <TableList
+                contents={contents}
+                actionMode={actionMode}
+                onSubmit={onSubmit}
+                viewDetail={viewDetail}
+                viewDetailUpdate={viewDetailUpdate}
+            ></TableList>
+        </div>
+    );
+} 
 
 export default TableMain;

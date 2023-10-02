@@ -2,7 +2,7 @@ import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import Axios from "axios";
 
-function ViewDetail ({ list, onSubmit, viewDetailUpdate}) {
+function ViewDetail ({ list, onSubmit, viewDetailUpdate, view, onView}) {
     // 게시판 제목을 누르면 내용이 보이게 해줌.
 
     const onDelete = (e) => { //삭제시 모드변경이 필요가 없기에 여기에 생성을해서 사용.
@@ -19,30 +19,32 @@ function ViewDetail ({ list, onSubmit, viewDetailUpdate}) {
 
     return(
         <div>
+            <div>
+            <Button onClick={() => onView(view)}>닫기</Button>
+            </div>
             <Table>
                 <tr>
                     <td>번호</td>
-                    <td>{list.USER_NUMBER}</td>
+                    <td>{list.user_number}</td>
                 </tr>
                 <tr>
-                    <td>번호</td>
-                    <td>{list.USER_TITLE}</td>
+                    <td>제목</td>
+                    <td>{list.user_title}</td>
                 </tr>
                 <tr>
                     <td>작성자</td>
-                    <td>{list.USER_ID}</td>
+                    <td>{list.user_userId}</td>
                 </tr>
                 <tr>
                     <td>날짜</td>
-                    <td>{list.USERID_DATE}</td>
+                    <td>{list.user_userIdDate}</td>
                 </tr>
                 <tr>
                     <td>내용</td>
-                    <td>{list.USER_CONTENT}</td>
+                    <td>{list.user_content}</td>
                 </tr>
                 <tr>
                     <td>
-                        <Button variant="info" onClick={onSubmit}>글목록</Button>
                         <Button 
                             variant="secondary" 
                             id={list.USER_NUMBER}
