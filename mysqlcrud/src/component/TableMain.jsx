@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TableList from './TableList';
-import Write from './Write';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Axios from "axios";
-import ViewDetail from './ViewDetail';
 import Update from './Update';
+import Contents from './Contents';
 
 function TableMain() {
   // 모드를 사용하려면 함수를 사용하여 props를 이용해서 전달해줘야한다.
@@ -17,18 +16,12 @@ function TableMain() {
         user_userId: "",
         user_userIdDate: "",
     })
-    const [actionMode, setActionMode] = useState({ mode: 0 }); // 모드를 적용하여 작성 및 수정 등을 하게 해줌.
 
-    useEffect(() => {}, []);
     // get과 post차이는 서버에서 데이터를 받아 올 때 사용이 됨. get은 조회 post는 수정 및 생성 역할을 함.
         const onSubmit = () => { // mysql테이블 내용을 화면에 보여지게 해줌.
             Axios.get("http://localhost:8000/list", {})
             .then((res) => { // server -> index.js에 있는 res로 전달을 받음.
                 setContents(res.data);
-                setActionMode({
-                    ...actionMode,
-                    mode: 0
-                });
             })
             .catch((err) => {
                 console.log(err);
@@ -52,10 +45,6 @@ function TableMain() {
                     user_userId: data.USER_ID,
                     user_userIdDate: data.USERID_DATE,
                 });
-                setActionMode({ // 모드변경을 통해 상세보기를 할 수 있음.
-                    ...actionMode,
-                    mode: 1
-                })
             }
         })
         .catch((err) => {
@@ -78,37 +67,22 @@ function TableMain() {
                     user_userId: data.USER_ID,
                     user_userIdDate: data.USERID_DATE,
                 });
-                setActionMode({ // 모드변경을 통해 상세보기를 할 수 있음.
-                    ...actionMode,
-                    mode: 2
-                })
             }
         })
         .catch((err) => {
             console.log(err);
         })
     }
-    
-    const onUpdate = () => { // db에 넣은 내용을 수정하는 코드
-        Axios.post("http://localhost:8000/update", {
-            list: list,
-        }) 
-        .then(() => {
-            // eslint-disable-next-line no-undef
-            onSubmit();
-        })
-        .catch(err => console.log(err))
-    }
 
     return (
         <div>
             <TableList
                 contents={contents}
-                actionMode={actionMode}
                 onSubmit={onSubmit}
                 viewDetail={viewDetail}
                 viewDetailUpdate={viewDetailUpdate}
-            ></TableList>
+            >
+            </TableList>
         </div>
     );
 } 

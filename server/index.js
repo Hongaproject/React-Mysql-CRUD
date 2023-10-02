@@ -50,23 +50,13 @@ app.post("/viewdetail", (req, res) => {
   });
 });
 
-// 제목 클릭시 상세내용 보여주고 모드 변경을 위해 작성한 API코드
-app.post("/viewdetail", (req, res) => {
-  const number = parseInt(req.body.number);
-
-  const userQuery = "SELECT USER_NUMBER, USER_TITLE, USER_CONTENT, USER_ID, DATE_FORMAT(USERID_DATE, '%Y-%m-%d') AS USERID_DATE FROM USER WHERE USER_NUMBER = ?;";
-  dbConnect.query(userQuery, [number], (err, result) => {
-    res.send(result);
-  });
-});
-
 // 업데이트 시 사용되는 API코드
 app.post("/update", (req, res) => { // 화면에서 DB로 내용을 넣어주고 수정을 할 수 있게 해주는 코드
   const title = req.body.list.user_title;
   const content = req.body.list.user_content;
   const number = req.body.list.user_number;
     
-  const userQuery = "UPDATE USER SET USER_TITLE = ? USER_CONTENT = ? BOARD_DATE=now() WHERE USER_NUMBER = ?;"; // DB에 내용 넣고 수정을 가능하게 해줌.
+  const userQuery = "UPDATE USER SET USER_TITLE = ? USER_CONTENT = ? USERID_DATE=now() WHERE USER_NUMBER=?;"; // DB에 내용 넣고 수정을 가능하게 해줌.
   dbConnect.query(userQuery, [title, content, number], (err, result) => {
     res.send(result);
   });

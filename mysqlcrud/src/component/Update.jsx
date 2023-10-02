@@ -1,45 +1,61 @@
-import { useState } from "react";
-import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import Axios from "axios";
+import { useState } from "react";
 
-function Update ({ list, setList, onUpdate}) {
+function Update ({ list, onSubmit, update, onUpdating }) {
     // 글 수정하는 컴포넌트.
 
+    const [text, setText] = useState({
+        title: "",
+        content: ""
+    });
+
+    const {title, content} = text;
+
     const onChange = (e) => {
-        setList({
-            ...list,
-            [e.target.name]: e.target.value
+        const {name, value} = e.target;
+        setText({
+            ...text,
+            [name]: value
+        });
+    };
+
+    const onUpdate = (e) => { // db에 넣은 내용을 수정하는 코드
+        Axios.post("http://localhost:8000/update", {
+            number: e.target.id,
+            title,
+            content,
+        }) 
+        .then(() => {
+            setText({
+                title: "",
+                content: ""
+            })
         })
+        .catch(err => console.log(err))
+        onSubmit();
     }
 
     return(
         <div>
+            <div className="mt-1 mb-1">
+                <Button onClick={()=> onUpdating(update)}>닫기</Button>
+            </div>
             <form>
-                <Table striped bordered hover>
-                    <tr>
-                        <td>제목</td>
-                        <td>
-                            <input type="text" name="user_title" value={list.user_title} onChange={onChange}/>
-                            {list.USER_TITLE}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>작성자</td>
-                        <td>{list.USER_ID}</td>
-                    </tr>
-                    <tr>
-                        <td>내용</td>
-                        <td>
-                            <input type="text" name="user_content" value={list.user_content} onChange={onChange}/>
-                            {list.USER_CONTENT}
-                        </td>
-                    </tr>
-                    <tr>
-                        <div className="text-center mb-3">
-                            <Button variant="secondary" onClick={onUpdate}>수정</Button>
-                        </div>
-                    </tr>
-                </Table>
+                <div>
+                    제목: 
+                    <input type="text" name="title" value={title} onChange={onChange}/>
+                </div>
+                <div>
+                    작성자: {list.USER_ID}
+                </div>
+                <div>
+                    내용: 
+                    <input type="text" name="content" value={content} onChange={onChange}/>
+                </div>
+                <div className="mt-1 mb-1">
+                    <Button variant="secondary" onClick={onUpdate}>수정하기</Button>
+                </div>
             </form>
         </div>
     );
