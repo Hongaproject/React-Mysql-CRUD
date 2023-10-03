@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import Axios from "axios";
 import { useState } from "react";
 
-function Update ({ list, onSubmit, update, onUpdating }) {
+function Update ({ list, setList, onSubmit, update, onUpdating }) {
     // 글 수정하는 컴포넌트.
 
     const [text, setText] = useState({
@@ -26,14 +26,12 @@ function Update ({ list, onSubmit, update, onUpdating }) {
             title,
             content,
         }) 
-        .then(() => {
-            setText({
-                title: "",
-                content: ""
-            })
+        .then((res) => {
+            console.log(res);
         })
-        .catch(err => console.log(err))
-        onSubmit();
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
     return(
@@ -44,14 +42,15 @@ function Update ({ list, onSubmit, update, onUpdating }) {
             <form>
                 <div>
                     제목: 
-                    <input type="text" name="title" value={title} onChange={onChange}/>
+                    <input type="text" name="title" value={title} onChange={onChange} />
+                    {text.title}
                 </div>
                 <div>
                     작성자: {list.USER_ID}
                 </div>
                 <div>
                     내용: 
-                    <input type="text" name="content" value={content} onChange={onChange}/>
+                    <input type="text" name="content" value={content} onChange={onChange} />
                 </div>
                 <div className="mt-1 mb-1">
                     <Button variant="secondary" onClick={onUpdate}>수정하기</Button>

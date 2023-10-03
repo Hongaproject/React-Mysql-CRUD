@@ -2,8 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import TableList from './TableList';
 import { useState } from "react";
 import Axios from "axios";
-import Update from './Update';
-import Contents from './Contents';
 
 function TableMain() {
   // 모드를 사용하려면 함수를 사용하여 props를 이용해서 전달해줘야한다.
