@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import ViewDetail from "./ViewDetail";
 
-function Contents ({ list, onSubmit, viewDetailUpdate }) {
+function Contents ({ list, onSubmit }) {
     // table에 tbody부분에 mysql과 연동을 시켜 내용을 보여줌.
 
     const [view, setView] = useState(false);
@@ -18,7 +18,7 @@ function Contents ({ list, onSubmit, viewDetailUpdate }) {
             <td>{list.USER_NUMBER}</td>
             <td>
                 <button id={list.USER_NUMBER} onClick={onView}>{list.USER_TITLE}</button>
-                {view === true ? ( <ViewDetail list={list} view={view} onView={onView} onSubmit={onSubmit} viewDetailUpdate={viewDetailUpdate} /> ) : null}
+                {view === true ? ( <ViewDetail list={list} view={view} onView={onView} onSubmit={onSubmit} /> ) : null}
             </td>
             <td>{list.USER_ID}</td>
             <td>{list.USERID_DATE}</td>

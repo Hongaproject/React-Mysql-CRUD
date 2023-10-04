@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Contents from "./Contents";
 import Write from "./Write";
 
-function TableList({contents, onSubmit, viewDetail, viewDetailUpdate, actionMode, onUpdate}) {
+function TableList({contents, onSubmit, viewDetail }) {
     // 구조를 바꿔서 모드를 넣어 작성 수정 등을 해보려고 테스트 파일을 만듬.
 
     useEffect(() => {
@@ -41,10 +41,8 @@ function TableList({contents, onSubmit, viewDetail, viewDetailUpdate, actionMode
                                 <Contents
                                     list={list}
                                     key={list.USER_NUMBER}
-                                    actionMode={actionMode}
                                     onSubmit={onSubmit}
                                     viewDetail={viewDetail}
-                                    viewDetailUpdate={viewDetailUpdate}
                                 />
                             )
                         })}

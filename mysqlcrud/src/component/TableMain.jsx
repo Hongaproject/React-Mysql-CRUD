@@ -50,27 +50,6 @@ function TableMain() {
         })
     }
 
-    const viewDetailUpdate = (e) => { // 글 수정을 위해 모드 변경 하기 위한 함수
-        Axios.post("http://localhost:8000/viewdetail", {
-            number: e.target.id
-        })
-        .then((res) => {
-            const {data} = res;
-            if(res.data.length > 0){
-                setList({
-                    ...list,
-                    user_number: data.USER_NUMBER, // Key는 대문자로 되어 있어서 대문자 사용
-                    user_title: data.USER_TITLE,
-                    user_content: data.USER_CONTENT,
-                    user_userId: data.USER_ID,
-                    user_userIdDate: data.USERID_DATE,
-                });
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }
 
     return (
         <div>
@@ -78,7 +57,6 @@ function TableMain() {
                 contents={contents}
                 onSubmit={onSubmit}
                 viewDetail={viewDetail}
-                viewDetailUpdate={viewDetailUpdate}
             >
             </TableList>
         </div>

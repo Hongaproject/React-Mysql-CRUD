@@ -7,18 +7,18 @@ import Update from "./Update";
 function ViewDetail ({ list, setList, onSubmit, view, onView }) {
     // 게시판 제목을 누르면 내용이 보이게 해줌.
 
-    const [update, setUpdate] = useState(false);
+    const [updating, setUpdating] = useState(false);
 
     const onUpdating = () => {
-        setUpdate(!update);
+        setUpdating(!updating);
     }
 
     const onDelete = (e) => { //삭제시 모드변경이 필요가 없기에 여기에 생성을해서 사용.
         Axios.post("http://localhost:8000/delete", { 
             number: e.target.id
         })
-        .then(() => {
-            onSubmit();
+        .then((res) => {
+            console.log(res);
         })
         .catch((err) => {
             console.log(err);
@@ -44,7 +44,7 @@ function ViewDetail ({ list, setList, onSubmit, view, onView }) {
                     id={list.USER_NUMBER}
                     onClick={onUpdating}
                 >수정</Button>
-                {update === true ? (<Update list={list} onSubmit={onSubmit} setList={setList} update={update} onUpdating={onUpdating} />) : null}
+                {updating === true ? (<Update list={list} onSubmit={onSubmit} setList={setList} updating={updating} onUpdating={onUpdating} />) : null}
             </div>
         </div>
     );

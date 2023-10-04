@@ -50,7 +50,6 @@ function Write({ onSubmit, writeMode, onWriteMode}) {
         .catch((err) => {
             console.log(err);
         })
-        onSubmit();
     }   
 
     return(

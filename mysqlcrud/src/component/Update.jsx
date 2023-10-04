@@ -2,7 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 
-function Update ({ list, onSubmit, update, onUpdating }) {
+function Update ({ list, updating, onUpdating }) {
     // 글 수정하는 컴포넌트.
 
     const [text, setText] = useState({
@@ -34,10 +34,11 @@ function Update ({ list, onSubmit, update, onUpdating }) {
         })
     }
     
+
     return(
         <div>
             <div className="mt-1 mb-1">
-                <Button onClick={()=> onUpdating(update)}>닫기</Button>
+                <Button onClick={()=> onUpdating(updating)}>닫기</Button>
             </div>
             <Form>
                 <div>
