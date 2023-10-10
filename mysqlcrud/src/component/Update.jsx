@@ -23,8 +23,8 @@ function Update ({ list, updating, onUpdating }) {
     const onUpdate =  (e) => { // db에 넣은 내용을 수정하는 코드
         Axios.post("http://localhost:8000/update", {
             number: e.target.id,
-            title,
-            content,
+            title: text.title,
+            content: text.content
         }) 
         .then((res) => {
             console.log(res);
