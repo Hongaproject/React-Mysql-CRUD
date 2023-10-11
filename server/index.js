@@ -3,7 +3,7 @@
 // 서버와 통신이 되는지 확인 
 const express = require("express"); // 웹서버 생성
 const app = express(); // express 설정
-const PORT = process.env.port || 8000; // 포트번호 설정
+const PORT = process.env.port || 8001; // 포트번호 설정
 const bodyParser = require("body-parser"); // 요청 정보처리
 
 // DB 연동시 위한 코드 
@@ -34,52 +34,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
   
 // Mysql내용을 화면에 보여주는 서버 API코드 
 app.get("/list", (req, res) => { // DB에 있는 내용 보여주는 코드
-  const userQuery = "SELECT USER_NUMBER, USER_TITLE, USER_CONTENT, USER_ID, DATE_FORMAT(USERID_DATE, '%Y-%m-%d') AS USERID_DATE FROM USER;"; // 오늘 날짜 및 내용 가져오기 위해 사용됨.
+  const userQuery = "SELECT USER_NUMBER, USER_TITLE, USER_ID, DATE_FORMAT(USERID_DATE, '%Y-%m-%d') AS USERID_DATE FROM USER;"; // 오늘 날짜 및 내용 가져오기 위해 사용됨.
     dbConnect.query(userQuery, (err, result) => {
       res.send(result);
     });
   });
 
-// 제목 클릭시 상세내용 보여주게 하는 API코드
-app.post("/viewdetail", (req, res) => {
-  const number = parseInt(req.body.number);
-
-  const userQuery = "SELECT USER_NUMBER, USER_TITLE, USER_CONTENT, USER_ID, DATE_FORMAT(USERID_DATE, '%Y-%m-%d') AS USERID_DATE FROM USER WHERE USER_NUMBER = ?;";
-  dbConnect.query(userQuery, [number], (err, result) => {
-    res.send(result);
-  });
-});
-
-// 업데이트 시 사용되는 API코드
-app.post("/update", (req, res) => { // 화면에서 DB로 내용을 넣어주고 수정을 할 수 있게 해주는 코드
-  const title = req.body.list.user_title;
-  const content = req.body.list.user_content;
-  const number = req.body.list.user_number;
-    
-  const userQuery = "UPDATE USER SET USER_TITLE = ? USER_CONTENT = ? USERID_DATE=now() WHERE USER_NUMBER=?;"; // DB에 내용 넣고 수정을 가능하게 해줌.
-  dbConnect.query(userQuery, [title, content, number], (err, result) => {
-    res.send(result);
-  });
-});
-
-app.post("/delete", (req, res) => {
-  const number = req.body.number;
-
-  const userQuery = "DELETE FROM USER WHERE USER_NUMBER = ?;";
-  dbConnect.query(userQuery, [number], (err, result) => {
-    res.send(result);
-  });
-});
-
-app.post("/insert", (req, res) => {
-  const title = req.body.title;
-  const content = req.body.content;
-
-  const userQuery = "INSERT INTO USER (USER_TITLE, USER_CONTENT, USER_ID) VALUES (?, ?, '작성자');";
-  dbConnect.query(userQuery, [title, content], (err, result) => {
-    res.send(result);
-  });
-});
 
   app.listen(PORT, ()=>{ // 서버와 통신이 되는지 확인 
     console.log(`running on port ${PORT}`);
