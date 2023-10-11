@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 function BoardList () {
 
@@ -41,8 +42,8 @@ function BoardList () {
                     {
                         boardList.map((list)=> (
                             <tr key={list.USER_NUMBER}>
-                                <td>{list.USER_NUMBER}</td>
-                                <td>{list.USER_TITLE}</td>
+                                <td><Link to={`/detail/${list.USER_NUMBER}`}>{list.USER_NUMBER}</Link></td>
+                                <td><Link to={`/detail/${list.USER_NUMBER}`}>{list.USER_TITLE}</Link></td>
                                 <td>{list.USER_ID}</td>
                                 <td>{list.USERID_DATE}</td>
                             </tr>
