@@ -49,7 +49,7 @@ function BoardDetail () {
                 <h2>제목 : {boardDetail.USER_TITLE} ({boardDetail.USERID_DATE})</h2>
                 <h5>작성자 : {boardDetail.USER_ID}</h5>
                 <p>내용 : {boardDetail.USER_CONTENT}</p>
-                <button>수정</button>
+                <button><Link to={`/update/${idx}`}>수정</Link></button>
             </div>
         </div>
     );
