@@ -40,6 +40,16 @@ app.get("/list", (req, res) => { // DB에 있는 내용 보여주는 코드
     });
   });
 
+app.post("/insert", (req, res) => {
+  const title = req.body.title;
+  const content = req.body.content;
+    
+  const userQuery = "INSERT INTO USER (USER_TITLE, USER_CONTENT, USER_ID) VALUES (?, ?, '작성자');";
+  dbConnect.query(userQuery, [title, content], (err, result) => {
+    res.send(result);
+  });
+});
+
 
   app.listen(PORT, ()=>{ // 서버와 통신이 되는지 확인 
     console.log(`running on port ${PORT}`);
