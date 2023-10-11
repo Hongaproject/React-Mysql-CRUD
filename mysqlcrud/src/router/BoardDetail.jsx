@@ -22,10 +22,24 @@ function BoardDetail () {
         console.log(idx);
     }, []);
 
+    const onDelete = (e) => {
+        Axios.post(`http://localhost:8001/delete/${idx}`, { 
+        })
+        .then((res) => {
+            console.log(res);
+            alert("게시글이 삭제되었습니다.")
+            document.location.href = '/'
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
     return(
         <div>
             <div>
                 <Link to={"/"}>게시판가기</Link>
+                <button id={idx} onClick={onDelete}>삭제</button>
             </div>
             <div>
                 <div>
