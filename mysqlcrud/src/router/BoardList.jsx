@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import Table from "react-bootstrap/Table";
-import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 function BoardList () {
 
+    const navigate = useNavigate();
     const [boardList, setBoardList] = useState([]);
 
     useEffect(() => {
@@ -24,6 +26,7 @@ function BoardList () {
         <div>
             <div>
                 게시판 목록 입니다.
+                <Button onClick={()=> navigate('/write')}>작성하기</Button>
             </div>
             <Table striped bordered hover>
                 <thead>

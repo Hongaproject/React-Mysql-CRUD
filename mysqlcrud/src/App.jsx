@@ -3,6 +3,7 @@ import Header from './layout/Header';
 import Footer from './layout/Footer';
 import { Route, Routes } from 'react-router-dom';
 import BoardList from './router/BoardList';
+import BoardWrite from './router/BoardWrite';
 
 function App() {
   // React + Mysql + Node js를 사용하여 게시판 만들기
@@ -14,6 +15,7 @@ function App() {
       <Header />
         <Routes>
           <Route path="/" element={<BoardList />} />
+          <Route path="/write" element={<BoardWrite />} />
         </Routes>
       <Footer />
     </>
