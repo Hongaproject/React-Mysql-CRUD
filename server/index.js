@@ -50,6 +50,14 @@ app.post("/insert", (req, res) => {
   });
 });
 
+app.post("/detail/:idx", (req, res) => { // DB에 있는 내용 보여주는 코드
+  const value = [req.params.idx];
+  
+  const userQuery = "SELECT USER_NUMBER, USER_TITLE, USER_CONTENT, USER_ID, DATE_FORMAT(USERID_DATE, '%Y-%m-%d') AS USERID_DATE FROM USER WHERE USER_NUMBER=?;"; // 오늘 날짜 및 내용 가져오기 위해 사용됨.
+    dbConnect.query(userQuery, value, (err, result) => {
+      res.send(result);
+    });
+  });
 
   app.listen(PORT, ()=>{ // 서버와 통신이 되는지 확인 
     console.log(`running on port ${PORT}`);
