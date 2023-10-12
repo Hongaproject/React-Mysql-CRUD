@@ -41,23 +41,23 @@ function BoardWrite () {
     }
 
     return(
-        <div>
-            <div>
-                <button onClick={()=> navigate("/")}>Home</button>
+        <div className="text-center">
+            <div className="mb-4">
+                <span>게시판 작성 페이지 입니다.</span>
+                <button onClick={()=> navigate("/")} className="ms-2">Home</button>
             </div>
-            게시판 작성 페이지 입니다.
-            <div>
+            <div className="mb-2">
                 <label>제목 : </label>
-                <input type="text" name="title" value={title} onChange={onChange} placeholder="제목을 입력해주세요." />
+                <input className="ms-2" type="text" name="title" value={title} onChange={onChange} placeholder="제목을 입력해주세요." />
             </div>
-            <div>
+            <div className="mb-3">
                 <label>내용 : </label>
-                <input type="text" name="content" value={content} onChange={onChange} placeholder="내용을 입력해주세요." />
+                <input className="ms-2" type="text" name="content" value={content} onChange={onChange} placeholder="내용을 입력해주세요." />
             </div>
-            <div>
+            <div className="d-flex flex-row justify-content-center">
                 <button onClick={onWrite}>작성하기</button>
                 <form>
-                    <button onClick={onReset}>취소</button>
+                    <button onClick={onReset} className="ms-2">취소</button>
                 </form>
             </div>
         </div>

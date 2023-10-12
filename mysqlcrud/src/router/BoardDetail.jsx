@@ -36,20 +36,17 @@ function BoardDetail () {
     }
 
     return(
-        <div>
-            <div>
-                <Link to={"/"}>게시판가기</Link>
-                <button id={idx} onClick={onDelete}>삭제</button>
+        <div className="text-center">
+            <div className="mb-3">
+                <Link to={"/"} className="text-decoration-none">게시판가기</Link>
+                <button id={idx} onClick={onDelete} className="ms-2">삭제</button>
             </div>
             <div>
-                <div>
-                    안녕하세요
-                </div>
-                <h3>번호 : {idx}</h3>
+                <h3 className="mb-3">번호 : {idx}</h3>
                 <h2>제목 : {boardDetail.USER_TITLE} ({boardDetail.USERID_DATE})</h2>
-                <h5>작성자 : {boardDetail.USER_ID}</h5>
-                <p>내용 : {boardDetail.USER_CONTENT}</p>
-                <button><Link to={`/update/${idx}`}>수정</Link></button>
+                <h5 className="mb-3">작성자 : {boardDetail.USER_ID}</h5>
+                <p className="mb-3">내용 : {boardDetail.USER_CONTENT}</p>
+                <button><Link to={`/update/${idx}`} className="text-decoration-none">수정</Link></button>
             </div>
         </div>
     );

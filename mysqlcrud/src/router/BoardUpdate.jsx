@@ -57,21 +57,21 @@ function BoardUpdate () {
     }
 
     return(
-        <div>
+        <div className="text-center">
             <form>
-                <div>
+                <div className="d-flex flex-row mb-3 justify-content-center">
                     <h3>게시판 수정 페이지 입니다.</h3>
-                    <button onClick={()=> navigate("/")}>Home</button>
-                    <button onClick={onReset}>취소</button>
+                    <button onClick={()=> navigate("/")} className="ms-2">Home</button>
+                    <button onClick={onReset} className="ms-2">취소</button>
                 </div>
             </form>
-            <div>
+            <div className="mb-2">
                 <label>제목 : </label>
-                <input type="text" name="title" value={title} onChange={onChange} placeholder="제목을 입력해주세요." />
+                <input className="ms-2" type="text" name="title" value={title} onChange={onChange} placeholder="제목을 입력해주세요." />
             </div>
-            <div>
+            <div className="mb-3">
                 <label>내용 : </label>
-                <input type="text" name="content" value={content} onChange={onChange} placeholder="내용을 입력해주세요." />
+                <input className="ms-2" type="text" name="content" value={content} onChange={onChange} placeholder="내용을 입력해주세요." />
             </div>
             <button onClick={onUpdate}>수정</button>
         </div>
