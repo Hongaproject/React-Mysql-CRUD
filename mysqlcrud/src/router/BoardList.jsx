@@ -4,11 +4,14 @@ import Axios from "axios";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import BoardContent from "./BoardContent";
+import Pagination from "./Pagination";
 
-function BoardList () {
+function BoardMain () {
 
-    const navigate = useNavigate();
     const [boardList, setBoardList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(10); // 총 한 페이지서 10개의 데이터를 보여준다.
 
     useEffect(() => {
         const getBoardList = async () => {
@@ -23,36 +26,29 @@ function BoardList () {
         getBoardList();
     }, [boardList]);
 
+    const LastNum = currentPage * postsPerPage; // 1~10 11~20 이런식으로 보여주기 위해 선언했습니다.
+    const FirstNum = LastNum - postsPerPage; // 1~10 11~20 이런식으로 보여주기 위해 선언했습니다.
+    const totalPosts = (list) => { // 함수를 통해 배열 데이터를 slice해서 함수로 분할해 줍니다.
+      let totalPosts = 0;
+      totalPosts = list.slice(FirstNum, LastNum);
+      return totalPosts;
+    };
+
+    // Pagination 부분에 페이지당 포스트 수, 전체 포스트 갯수
+    // 사용자가 선택한 페이지 넘버에 따라, currentPage 의 값이 변경되도록 구현할 것입니다. 
+    // 예를 들어 사용자가 3번을 선택하면, currentPage 상태값을 
+    // 사용한 LastNum, FirstNum 변수의 값도 변경되면서 분할되는 데이터들도 달라지게 됨.
+    
     return(
         <div>
-            <div>
-                게시판 목록 입니다.
-                <Button onClick={()=> navigate('/write')}>작성하기</Button>
-            </div>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>작성자</td>
-                        <td>작성일</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        boardList.map((list)=> (
-                            <tr key={list.USER_NUMBER}>
-                                <td><Link to={`/detail/${list.USER_NUMBER}`}>{list.USER_NUMBER}</Link></td>
-                                <td><Link to={`/detail/${list.USER_NUMBER}`}>{list.USER_TITLE}</Link></td>
-                                <td>{list.USER_ID}</td>
-                                <td>{list.USERID_DATE}</td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </Table>
+            <BoardContent boardList={totalPosts(boardList)}/>
+            <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={boardList.length}
+                setCurrentPage={setCurrentPage}
+            />
         </div>
     );
 }
 
-export default BoardList;
+export default BoardMain;
