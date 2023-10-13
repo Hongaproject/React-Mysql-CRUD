@@ -60,9 +60,8 @@ function BoardUpdate () {
         <div className="text-center">
             <form>
                 <div className="d-flex flex-row mb-3 justify-content-center">
-                    <h3>게시판 수정 페이지 입니다.</h3>
+                    <span>게시판 수정 페이지 입니다.</span>
                     <button onClick={()=> navigate("/")} className="ms-2">Home</button>
-                    <button onClick={onReset} className="ms-2">취소</button>
                 </div>
             </form>
             <div className="mb-2">
@@ -73,7 +72,12 @@ function BoardUpdate () {
                 <label>내용 : </label>
                 <input className="ms-2" type="text" name="content" value={content} onChange={onChange} placeholder="내용을 입력해주세요." />
             </div>
-            <button onClick={onUpdate}>수정</button>
+            <div className="d-flex flex-row justify-content-center">
+                <button onClick={onUpdate}>수정</button>
+                <form>
+                    <button onClick={onReset} className="ms-2">취소</button>
+                </form>
+            </div>
         </div>
     );
 }
