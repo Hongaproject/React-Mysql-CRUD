@@ -1,5 +1,5 @@
 # 게시판
-데이터베이스를 연결해서 제작한 게시판  서비스입니다.
+1인 개발 프로젝트 - 데이터베이스를 연결해서 제작한 게시판 서비스입니다.
 
 ### 계획서
 https://precious-earwig-cd5.notion.site/CRUDboard-React-Project-1-e738363c53ac4582a4874fc2e03d7cf8?pvs=4
